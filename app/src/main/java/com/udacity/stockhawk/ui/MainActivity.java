@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         StockAdapter.StockAdapterOnClickHandler {
 
     private static final int STOCK_LOADER = 0;
+    private boolean FIRST_LOAD = true;
     @BindView(R.id.recycler_view)
     RecyclerView stockRecyclerView;
     @BindView(R.id.swipe_refresh)
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         QuoteSyncJob.syncImmediately(this);
 
         if (!networkUp() && adapter.getItemCount() == 0) {
+            // runs even when we have stocks in db
             swipeRefreshLayout.setRefreshing(false);
             error.setText(getString(R.string.error_no_network));
             error.setVisibility(View.VISIBLE);
@@ -143,6 +145,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (data.getCount() != 0) {
             error.setVisibility(View.GONE);
+            if (FIRST_LOAD && !networkUp()){
+                // case where old cached data shows
+                FIRST_LOAD = false;
+                Toast.makeText(this, R.string.toast_showing_cached, Toast.LENGTH_LONG).show();
+            }
         }
         adapter.setCursor(data);
     }

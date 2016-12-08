@@ -29,6 +29,7 @@
 
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
+    <string name="toast_showing_cached">Local data shown as network connection not available.</string>
 
     <string name="cd_new_stock_fab">Add new stock</string>
     <string name="cd_stock_change_percentage">Show stock change in percentage</string>
