@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.MainActivity">
+        <!-- http://stackoverflow.com/questions/12276027/how-can-i-return-to-a-parent-activity-correctly -->
+        <activity android:name=".ui.MainActivity" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,6 +38,15 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:label="Stock History"
+            android:name=".ui.DetailActivity">
+            <!-- http://stackoverflow.com/questions/26637675/action-bar-back-button -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
