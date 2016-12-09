@@ -6,6 +6,9 @@
     android:resizeMode="vertical|horizontal"
     android:widgetCategory="home_screen|keyguard"
     android:previewImage="@mipmap/ic_launcher"
-    android:updatePeriodMillis="240000">
+    android:updatePeriodMillis="0"
+    android:minResizeHeight="146dp"
+    android:minResizeWidth="146dp"
+    android:configure="com.udacity.stockhawk.widget.WidgetConfigure">
 
 </appwidget-provider>
