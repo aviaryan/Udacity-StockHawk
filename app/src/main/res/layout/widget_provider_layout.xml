@@ -4,14 +4,33 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        tools:text="Stock Hawk"
-        android:textAlignment="center"
-        android:textSize="26sp"
-        android:padding="10dp"
-        android:textColor="#C0FFFFFF"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/heading">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                tools:text="Stock Hawk"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:padding="10dp"
+                android:textColor="#C0FFFFFF"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/widgetCollectionList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#80000000">
+        </ListView>
+    </LinearLayout>
 </FrameLayout>

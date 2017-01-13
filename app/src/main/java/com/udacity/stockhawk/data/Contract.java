@@ -42,6 +42,10 @@ public final class Contract {
             return URI.buildUpon().appendPath(symbol).build();
         }
 
+        public static Uri makeBaseUri(){
+            return URI;
+        }
+
         static String getStockFromUri(Uri queryUri) {
             return queryUri.getLastPathSegment();
         }
