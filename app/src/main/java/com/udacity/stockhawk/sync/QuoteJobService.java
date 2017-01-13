@@ -22,5 +22,4 @@ public class QuoteJobService extends JobService {
         return false;
     }
 
-
 }

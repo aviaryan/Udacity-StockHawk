@@ -2,8 +2,11 @@ package com.udacity.stockhawk.widget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.RemoteViews;
 
 import com.udacity.stockhawk.R;
@@ -35,6 +38,18 @@ public class WidgetConfigure extends Activity {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_provider_layout);
         appWidgetManager.updateAppWidget(mAppWidgetId, views);
+        // update widget
+        final Context cc = this;
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int[] ids = {mAppWidgetId};
+                WidgetProvider myWidget = new WidgetProvider();
+                myWidget.onUpdate(cc, AppWidgetManager.getInstance(cc),ids);
+            }
+        }, 1000); // delay before adding items as it leads to size issues in widget
+        // end update
         Intent resultValue = new Intent();
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         setResult(RESULT_OK, resultValue);
