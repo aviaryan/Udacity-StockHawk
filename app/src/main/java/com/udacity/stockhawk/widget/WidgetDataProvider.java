@@ -104,7 +104,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
         // onClickFillIn
         Intent fillInIntent = new Intent();
-        fillInIntent.setAction(WidgetProvider.ACTION_TOAST);
+        fillInIntent.setAction(WidgetProvider.ACTION_DETAIL);
         Bundle bundle = new Bundle();
         bundle.putString(WidgetProvider.EXTRA_STRING, mCollections.get(position).get("symbol"));
         fillInIntent.putExtras(bundle);
