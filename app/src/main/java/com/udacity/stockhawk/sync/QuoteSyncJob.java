@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
@@ -43,7 +46,7 @@ public final class QuoteSyncJob {
     private QuoteSyncJob() {
     }
 
-    static void getQuotes(Context context) {
+    static void getQuotes(final Context context) {
 
         Timber.d("Running sync job");
 
@@ -78,7 +81,14 @@ public final class QuoteSyncJob {
                 StockQuote quote = stock.getQuote();
                 // if quote is non-existant
                 if (quote.getPrice() == null) {
-                    // TODO: show some message to user
+                    // http://stackoverflow.com/questions/7378936/how-to-show-toast-message-from-background-thread
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, "Invalid stock symbol", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     continue;
                 }
 
