@@ -38,6 +38,7 @@ public class WidgetConfigure extends Activity {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_provider_layout);
         appWidgetManager.updateAppWidget(mAppWidgetId, views);
+
         // update widget
         final Context cc = this;
         Handler handler = new Handler();
@@ -47,9 +48,12 @@ public class WidgetConfigure extends Activity {
                 int[] ids = {mAppWidgetId};
                 WidgetProvider myWidget = new WidgetProvider();
                 myWidget.onUpdate(cc, AppWidgetManager.getInstance(cc),ids);
+                // QuoteSyncJob.syncImmediately(cc); // sync
             }
         }, 1000); // delay before adding items as it leads to size issues in widget
+        // TODO: if widget added when no local data (very less probability)
         // end update
+
         Intent resultValue = new Intent();
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         setResult(RESULT_OK, resultValue);

@@ -20,6 +20,7 @@ import com.udacity.stockhawk.ui.MainActivity;
 public class WidgetProvider extends AppWidgetProvider {
     public static final String ACTION_DETAIL = "com.udacity.stockhawk.widget.ACTION_DETAIL";
     public static final String EXTRA_STRING = "com.udacity.stockhawk.widget.EXTRA_STRING";
+    public static String APP_OPEN = "com.udacity.stockhawk.widget.APP_OPEN";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -31,7 +32,13 @@ public class WidgetProvider extends AppWidgetProvider {
             detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             detailIntent.putExtra("symbol", item);
             context.startActivity(detailIntent);
+            // end launch detail
+        } else if (intent.getAction().equals(APP_OPEN)) {
+            Intent mainIntent = new Intent(context, MainActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(mainIntent);
         }
+
         super.onReceive(context, intent);
     }
 
@@ -47,6 +54,12 @@ public class WidgetProvider extends AppWidgetProvider {
             PendingIntent onClickPendingIntent = PendingIntent
                     .getBroadcast(context, 0, onItemClick, PendingIntent.FLAG_UPDATE_CURRENT);
             mView.setPendingIntentTemplate(R.id.widgetCollectionList, onClickPendingIntent);
+
+            // Add title app open event handler
+            // http://stackoverflow.com/questions/14798073/button-click-event-for-android-widget
+            Intent intent = new Intent(APP_OPEN);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            mView.setOnClickPendingIntent(R.id.widget_title, pendingIntent);
 
             appWidgetManager.updateAppWidget(widgetId, mView);
         }

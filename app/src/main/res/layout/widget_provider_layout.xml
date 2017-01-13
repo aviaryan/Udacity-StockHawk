@@ -23,6 +23,7 @@
                 android:textAlignment="center"
                 android:textSize="22sp"
                 android:padding="10dp"
+                android:id="@+id/widget_title"
                 android:textColor="#C0FFFFFF"/>
         </LinearLayout>
 
