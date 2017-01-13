@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -22,6 +23,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     public WidgetDataProvider(Context context, Intent intent){
         mContext = context;
+        Log.v(LOG_TAG, "in wdp");
     }
 
     @Override
@@ -94,6 +96,20 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         mView.setTextViewText(R.id.symbol, temp.get("symbol"));
         mView.setTextViewText(R.id.price, temp.get("price"));
         mView.setTextViewText(R.id.change, temp.get("change_percent") + "%");
+
+        if (temp.get("change_percent").contains("-")){
+            int res = R.drawable.percent_change_pill_red;
+            mView.setInt(R.id.change, "setBackgroundResource", res);
+        }
+
+        // onClickFillIn
+        Intent fillInIntent = new Intent();
+        fillInIntent.setAction(WidgetProvider.ACTION_TOAST);
+        Bundle bundle = new Bundle();
+        bundle.putString(WidgetProvider.EXTRA_STRING, mCollections.get(position).get("symbol"));
+        fillInIntent.putExtras(bundle);
+        mView.setOnClickFillInIntent(R.id.stock_quote_listing, fillInIntent);
+
         return mView;
     }
 }

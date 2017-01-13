@@ -28,6 +28,9 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
+// skipping logs
+// ^((?!Yahoo).)*$ filter
+
 public final class QuoteSyncJob {
 
     private static final int ONE_OFF_ID = 2;
