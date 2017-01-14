@@ -76,18 +76,19 @@ public final class QuoteSyncJob {
             ArrayList<ContentValues> quoteCVs = new ArrayList<>();
 
             while (iterator.hasNext()) {
-                String symbol = iterator.next();
+                final String symbol = iterator.next();
 
                 Stock stock = quotes.get(symbol);
                 StockQuote quote = stock.getQuote();
                 // if quote is non-existant
                 if (quote.getPrice() == null) {
+                    PrefUtils.removeStock(context, symbol);
                     // http://stackoverflow.com/questions/7378936/how-to-show-toast-message-from-background-thread
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, "Invalid stock symbol", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Invalid stock symbol: " + symbol, Toast.LENGTH_SHORT).show();
                         }
                     });
                     continue;
