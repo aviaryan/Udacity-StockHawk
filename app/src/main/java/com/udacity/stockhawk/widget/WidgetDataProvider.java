@@ -90,19 +90,19 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews mView = new RemoteViews(mContext.getPackageName(), R.layout.list_item_quote);
+        RemoteViews mView = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item_quote);
         Log.v(LOG_TAG, "get view" + mCollections.size());
         HashMap<String, String> temp = mCollections.get(position);
-        mView.setTextViewText(R.id.symbol, temp.get("symbol"));
-        mView.setTextViewText(R.id.price, temp.get("price"));
-        mView.setTextViewText(R.id.change, temp.get("change_percent") + "%");
+        mView.setTextViewText(R.id.widget_symbol, temp.get("symbol"));
+        mView.setTextViewText(R.id.widget_price, temp.get("price"));
+        mView.setTextViewText(R.id.widget_change, temp.get("change_percent") + "%");
 
         if (temp.get("change_percent").contains("-")){
             int res = R.drawable.percent_change_pill_red;
-            mView.setInt(R.id.change, "setBackgroundResource", res);
+            mView.setInt(R.id.widget_change, "setBackgroundResource", res);
         } else {
             int res = R.drawable.percent_change_pill_green;
-            mView.setInt(R.id.change, "setBackgroundResource", res);
+            mView.setInt(R.id.widget_change, "setBackgroundResource", res);
         }
 
         // onClickFillIn
@@ -111,7 +111,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         Bundle bundle = new Bundle();
         bundle.putString(WidgetProvider.EXTRA_STRING, mCollections.get(position).get("symbol"));
         fillInIntent.putExtras(bundle);
-        mView.setOnClickFillInIntent(R.id.stock_quote_listing, fillInIntent);
+        mView.setOnClickFillInIntent(R.id.widget_stock_quote_listing, fillInIntent);
 
         return mView;
     }

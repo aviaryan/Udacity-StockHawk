@@ -2,13 +2,13 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/widget_provider_layout"
     android:minHeight="146dp"
-    android:minWidth="146dp"
+    android:minWidth="220dp"
     android:resizeMode="vertical|horizontal"
     android:widgetCategory="home_screen|keyguard"
     android:previewImage="@mipmap/ic_launcher"
     android:updatePeriodMillis="0"
     android:minResizeHeight="146dp"
-    android:minResizeWidth="146dp"
+    android:minResizeWidth="220dp"
     android:configure="com.udacity.stockhawk.widget.WidgetConfigure">
 
 </appwidget-provider>
