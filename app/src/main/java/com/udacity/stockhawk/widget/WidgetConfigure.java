@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.widget.RemoteViews;
 
 import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.sync.QuoteSyncJob;
 
 // -------------------
 // Add configuration to widget because of some weird issue
@@ -48,10 +49,9 @@ public class WidgetConfigure extends Activity {
                 int[] ids = {mAppWidgetId};
                 WidgetProvider myWidget = new WidgetProvider();
                 myWidget.onUpdate(cc, AppWidgetManager.getInstance(cc),ids);
-                // QuoteSyncJob.syncImmediately(cc); // sync
+                QuoteSyncJob.syncImmediately(cc); // sync
             }
         }, 1000); // delay before adding items as it leads to size issues in widget
-        // TODO: if widget added when no local data (very less probability)
         // end update
 
         Intent resultValue = new Intent();

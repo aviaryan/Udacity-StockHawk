@@ -35,4 +35,6 @@
     <string name="cd_stock_change_percentage">Show stock change in percentage</string>
     <string name="cd_stock_change_dollars">Show stock change in dollars</string>
     <string name="cd_editbox_stock">Name of new stock</string>
+
+    <string name="empty_view_text">No data yet. Waiting for sync</string>
 </resources>

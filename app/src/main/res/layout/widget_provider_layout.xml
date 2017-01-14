@@ -31,7 +31,18 @@
             android:id="@+id/widgetCollectionList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#D0000000">
+            android:background="@color/widget_bg">
         </ListView>
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/widget_bg"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:text="@string/empty_view_text"
+            android:textSize="20sp" />
     </LinearLayout>
 </FrameLayout>
