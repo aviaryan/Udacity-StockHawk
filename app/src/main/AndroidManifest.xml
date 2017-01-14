@@ -61,6 +61,7 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.udacity.stockhawk.widget.APP_OPEN" />
+                <action android:name="com.udacity.stockhawk.widget.UPDATE" />
             </intent-filter>
 
             <meta-data

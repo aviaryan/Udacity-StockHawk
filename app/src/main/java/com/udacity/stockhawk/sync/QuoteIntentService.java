@@ -25,23 +25,8 @@ public class QuoteIntentService extends IntentService {
         QuoteSyncJob.getQuotes(getApplicationContext());
 
         // update widget
-        // http://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-
-//        Intent wIntent = new Intent(this, WidgetProvider.class);
-//        wIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-//        int[] ids = {R.xml.appwidget_provider_info};
-//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
-//        sendBroadcast(intent);
-
-        // works per logs
-//        int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(
-//                new ComponentName(getApplication(), WidgetProvider.class));
-//        for (int id : widgetIDs)
-//            AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(id, R.id.widgetCollectionList);
-
-        // works when widget deleted and re-added
-        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), WidgetProvider.class));
-        WidgetProvider myWidget = new WidgetProvider();
-        myWidget.onUpdate(this, AppWidgetManager.getInstance(this),ids);
+        Intent cintent = new Intent(getApplicationContext(), WidgetProvider.class);
+        cintent.setAction(WidgetProvider.UPDATE_WIDGET);
+        sendBroadcast(cintent);
     }
 }

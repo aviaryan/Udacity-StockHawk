@@ -1,18 +1,16 @@
 package com.udacity.stockhawk.widget;
 
-import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.udacity.stockhawk.R;
-import com.udacity.stockhawk.sync.QuoteSyncJob;
 import com.udacity.stockhawk.ui.DetailActivity;
 import com.udacity.stockhawk.ui.MainActivity;
 
@@ -20,10 +18,12 @@ import com.udacity.stockhawk.ui.MainActivity;
 public class WidgetProvider extends AppWidgetProvider {
     public static final String ACTION_DETAIL = "com.udacity.stockhawk.widget.ACTION_DETAIL";
     public static final String EXTRA_STRING = "com.udacity.stockhawk.widget.EXTRA_STRING";
+    public static final String UPDATE_WIDGET = "com.udacity.stockhawk.widget.UPDATE";
     public static String APP_OPEN = "com.udacity.stockhawk.widget.APP_OPEN";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.v("WDP", "widget provider recieve" + intent.getAction());
         if (intent.getAction().equals(ACTION_DETAIL)) {
             String item = intent.getExtras().getString(EXTRA_STRING);
             // launch detail
@@ -37,6 +37,11 @@ public class WidgetProvider extends AppWidgetProvider {
             Intent mainIntent = new Intent(context, MainActivity.class);
             mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(mainIntent);
+        } else if (intent.getAction().equals(UPDATE_WIDGET)) {
+            // update widget
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            int [] ids = appWidgetManager.getAppWidgetIds(new ComponentName(context, this.getClass()));
+            appWidgetManager.notifyAppWidgetViewDataChanged(ids, R.id.widgetCollectionList);
         }
 
         super.onReceive(context, intent);
@@ -74,6 +79,10 @@ public class WidgetProvider extends AppWidgetProvider {
 
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         mView.setRemoteAdapter(widgetId, R.id.widgetCollectionList, intent);
+
+        // The empty view is displayed when the collection has no items. It should be a sibling
+        // of the collection view.
+        mView.setEmptyView(R.id.widgetCollectionList, R.id.empty_view);
 
         return mView;
     }
