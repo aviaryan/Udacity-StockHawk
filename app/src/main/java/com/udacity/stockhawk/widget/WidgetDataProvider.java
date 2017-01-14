@@ -100,6 +100,9 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         if (temp.get("change_percent").contains("-")){
             int res = R.drawable.percent_change_pill_red;
             mView.setInt(R.id.change, "setBackgroundResource", res);
+        } else {
+            int res = R.drawable.percent_change_pill_green;
+            mView.setInt(R.id.change, "setBackgroundResource", res);
         }
 
         // onClickFillIn

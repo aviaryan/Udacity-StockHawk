@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.udacity.stockhawk.data.Contract;
@@ -129,6 +130,7 @@ public final class QuoteSyncJob {
 
             Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
             context.sendBroadcast(dataUpdatedIntent);
+            Log.v("WDP", "sync done");
 
         } catch (IOException exception) {
             Timber.e(exception, "Error fetching stock quotes");
