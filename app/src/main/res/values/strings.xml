@@ -37,4 +37,6 @@
     <string name="cd_editbox_stock">Name of new stock</string>
 
     <string name="empty_view_text">No data yet. Waiting for sync</string>
+
+    <string name="widget_app_header">Touch here to open StockHawk app</string>
 </resources>

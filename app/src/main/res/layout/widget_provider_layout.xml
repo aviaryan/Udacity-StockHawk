@@ -24,7 +24,8 @@
                 android:textSize="22sp"
                 android:padding="10dp"
                 android:id="@+id/widget_title"
-                android:textColor="#C0FFFFFF"/>
+                android:textColor="#C0FFFFFF"
+                android:contentDescription="@string/widget_app_header"/>
         </LinearLayout>
 
         <ListView
